@@ -1,25 +1,29 @@
 class IssuesController < ApplicationController
   before_action :set_issue, only: %i[ show edit update destroy ]
 
-  # GET /issues or /issues.json
   def index
-    @issues = Issue.all
+    @issues = Issue.includes(
+      :project,
+      :tags,
+      :type_issue,
+      :employee,
+      :state_issue,
+      :priority_issue
+    ).
+    all.
+    page(params[:page])
   end
 
-  # GET /issues/1 or /issues/1.json
   def show
   end
 
-  # GET /issues/new
   def new
     @issue = Issue.new
   end
 
-  # GET /issues/1/edit
   def edit
   end
 
-  # POST /issues or /issues.json
   def create
     @issue = Issue.new(issue_params)
 

@@ -1,0 +1,17 @@
+.container
+  br
+  ul.nav.nav-pills.nav-fill
+    li.nav-item
+      = link_to 'Метрики', metrics_path, class: link_class('statistic', :free)
+    li.nav-item
+      = link_to 'Задачи', issues_path, class: link_class('issues', :free)
+    li.nav-item
+      = link_to 'Проекты', projects_path, class: link_class('projects')
+    li.nav-item
+      = link_to 'Исполнители', employees_path, class: link_class('employees')
+    li.nav-item.dropdown
+      a.nav-link.dropdown-toggle data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" Действия
+      ul class="dropdown-menu"
+        li = link_to 'Выйти', destroy_user_session_path, method: :delete, class: 'dropdown-item'
+        li = link_to 'Вoйти', user_session_path, class: 'dropdown-item'
+  hr

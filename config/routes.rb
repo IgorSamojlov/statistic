@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  root to: 'statistic#metrics'
+
   resources :employees
   resources :issues
   resources :tags
@@ -8,5 +10,6 @@ Rails.application.routes.draw do
   resources :projects
   devise_for :users
 
+  get 'metrics', to: 'statistic#metrics'
   resources :users, except: :destroy
 end

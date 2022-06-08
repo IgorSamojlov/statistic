@@ -1,0 +1,42 @@
+.container-fluid
+  p id="notice"
+    = notice
+  h1
+   | Issues
+
+  table.table
+    thead
+      tr
+        th = 'ID'
+        th = 'Проект'
+        th = 'Исполнитель'
+        th = 'Приоритет'
+        th = 'Статус'
+        th = 'Тип задачи'
+        th = 'Дата создания'
+        th = 'Дата начала разработки'
+        th = 'Дата завершения разработки'
+        th = 'Дата начала тестирования'
+        th = 'Дата завершения тестирования'
+    tbody
+      - @issues.each do |issue|
+        tr
+          td = issue.id
+          td = issue.project.name
+          td = issue.employee.full_name
+          td = issue.priority_issue.name
+          td = issue.state_issue.name
+          td = issue.type_issue.name
+          td = l(issue.created_at)
+          td = l(issue.date_start_dev)
+          td = l(issue.date_end_dev)
+          td = l(issue.date_start_test)
+          td = l(issue.date_end_test)
+          td = link_to 'Просмотр', issue
+          td = link_to 'Редактировать', edit_issue_path(issue)
+          td = link_to 'Удалить', issue, method: :delete, data: { confirm: 'Вы уверены?' }
+  br
+
+  = link_to 'New Issue', new_issue_path
+
+  = paginate @issues

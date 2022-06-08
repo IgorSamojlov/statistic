@@ -1,0 +1,60 @@
+.container
+  br
+  = form_with url: "/metircs", method: :get  do |f|
+    .row
+      .col-md-3
+        p
+          | Фильтр по дате c
+        = f.date_select(:start_date, order: [:day, :month, :year], class: 'form-control')
+
+      .col-md-3
+        p
+          | по
+        = f.date_select(:end_date, order: [:day, :month, :year], class: 'form-control')
+
+      .col-md-3
+        p
+          | Проект
+        = f.select(:project, Project.all.pluck(:name))
+
+      .col-md-3
+        p
+        = f.submit 'Показать', class: 'btn btn-outline-success'
+
+.container-fluid
+  br
+  .row
+    .col-md-6
+      p
+        h5
+          | Процент обнаружения дефектов тестировщиками и проектной командой
+
+      = pie_chart({'Тестировщики' => 90, 'Проектная команда' => 5, 'Пользователи' => 5},
+        suffix: "%",
+        label: 'Значение')
+
+    .col-md-6
+      p
+        h5
+          | Метрика общего устранения дефектов
+      = column_chart({'Blocked' => 70, 'Critical' => 50, 'Major' => 40, 'Minor' => 30},
+        suffix: "%",
+        label: 'Значение')
+
+  .row
+    .col-md-6
+      p
+        h5
+          | Процент обнаружения дефектов при бета-тестировании
+      = line_chart({'проект1' => 20, 'проект2' => 15, 'проект3' => 16, 'проект4' => 13},
+        curve: false,
+        label: 'Значение')
+
+    .col-md-6
+      p
+        h5
+          | Процент дефектов, найденых пользователями в готовом программном продукте
+      = column_chart({'blocked' => 70, 'critical' => 50, 'major' => 40, 'minor' => 30},
+        suffix: "%",
+        colors: ["#666"],
+        label: 'Значение')
