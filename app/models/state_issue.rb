@@ -1,0 +1,2 @@
+class StateIssue < ApplicationRecord
+end

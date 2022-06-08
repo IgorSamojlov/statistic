@@ -1,0 +1,2 @@
+class TypeIssue < ApplicationRecord
+end
