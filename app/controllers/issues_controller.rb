@@ -38,7 +38,6 @@ class IssuesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /issues/1 or /issues/1.json
   def update
     respond_to do |format|
       if @issue.update(issue_params)
@@ -51,7 +50,6 @@ class IssuesController < ApplicationController
     end
   end
 
-  # DELETE /issues/1 or /issues/1.json
   def destroy
     @issue.destroy
 
@@ -62,13 +60,23 @@ class IssuesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_issue
       @issue = Issue.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
     def issue_params
-      params.fetch(:issue, {})
+      params.require(:issue).permit(
+       :project_id,
+       :employee_id,
+       :priority_issue_id,
+       :state_issue_id,
+       :type_issue_id,
+       :summary,
+       :date_start_dev,
+       :date_end_dev,
+       :date_start_test,
+       :date_end_test,
+       tag_ids: []
+      )
     end
 end

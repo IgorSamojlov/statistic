@@ -1,0 +1,22 @@
+.container
+  p id="notice"
+    = notice
+
+  h1
+    | Просмотр
+
+  table.table
+    tbody
+      tr
+        td = 'ID'
+        td = @employee.id
+      tr
+        td = 'ФИО'
+        td = @employee.full_name
+      tr
+        td = 'Позиция'
+        td = @employee.position
+
+  .btn-group
+    = link_to 'Редактировать', edit_employee_path(@employee), class: "btn btn-outline-dark"
+    = link_to 'Назад', employees_path, class: "btn btn-outline-dark"

@@ -1,0 +1,6 @@
+.container
+  h2
+    | Новый проект
+
+  = render 'form', project: @project
+  = link_to 'Назад', projects_path, class: "btn btn-outline-dark"

@@ -1,0 +1,31 @@
+.container
+  - if notice.present?
+    .alert.alert-success.alert-dismissible.fade.show role="alert"
+      strong
+        = notice
+      button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"
+
+  h2 Статусы
+
+  table.table
+    thead
+      tr
+        th ID
+        th Название
+
+    tbody
+      - @state_issues.each do |state_issue|
+        tr
+          td = state_issue.id
+          td = state_issue.name
+          td = link_to 'Показать', state_issue
+          td = link_to 'Редактировать', edit_state_issue_path(state_issue)
+          td = link_to 'Удалить', state_issue, method: :delete, data: { confirm: 'Вы уверены?' }
+
+  = link_to 'Новый Статус', new_state_issue_path, class: 'btn btn-outline-success btn-sm'
+
+  br
+    .row.justify-content-center
+      .col-md-6.offset-md-2
+        = paginate @state_issues
+

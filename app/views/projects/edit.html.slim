@@ -1,0 +1,8 @@
+.container
+  h1 Редактировать Проект
+
+  = render 'form', project: @project
+
+  .btn-group
+    = link_to 'Просмотор', @project, class: "btn btn-outline-dark"
+    = link_to 'Назад', projects_path, class: "btn btn-outline-dark"

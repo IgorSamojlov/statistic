@@ -1,18 +1,22 @@
 .container-fluid
-  p id="notice"
-    = notice
-  h1
-   | Issues
+  - if notice.present?
+    .alert.alert-success.alert-dismissible.fade.show role="alert"
+      strong
+        = notice
+      button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"
+
+  h2 Задачи
 
   table.table
     thead
       tr
         th = 'ID'
         th = 'Проект'
-        th = 'Исполнитель'
+        th = 'Сотрудник'
         th = 'Приоритет'
         th = 'Статус'
         th = 'Тип задачи'
+        th = 'Теги'
         th = 'Дата создания'
         th = 'Дата начала разработки'
         th = 'Дата завершения разработки'
@@ -27,6 +31,10 @@
           td = issue.priority_issue.name
           td = issue.state_issue.name
           td = issue.type_issue.name
+          td
+            ul
+              - issue.tags.each do |tag|
+                li = tag.name
           td = l(issue.created_at)
           td = l(issue.date_start_dev)
           td = l(issue.date_end_dev)
@@ -35,8 +43,10 @@
           td = link_to 'Просмотр', issue
           td = link_to 'Редактировать', edit_issue_path(issue)
           td = link_to 'Удалить', issue, method: :delete, data: { confirm: 'Вы уверены?' }
+
+  = link_to 'Новая Задача', new_issue_path, class: 'btn btn-outline-success btn-sm'
+
   br
-
-  = link_to 'New Issue', new_issue_path
-
-  = paginate @issues
+    .row.justify-content-center
+      .col-md-6.offset-md-2
+        = paginate @issues

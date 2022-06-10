@@ -560,6 +560,9 @@ tags =
     'text to speech feature',
     'collaboration in longreads',
 ]
+[Employee, Project, PriorityIssue, TypeIssue, StateIssue, Tag, User, Issue].each do |klass|
+  klass.destroy_all
+end
 
 employee.each do |position, full_name|
   Employee.create!(position: position, full_name: full_name)
@@ -610,7 +613,7 @@ issues.each do
 
   record = Issue.create(
     project: Project.find_by_name(project),
-    priority_issue: PriorityIssue.find_by_name(priority_issue),
+    priority_issue: PriorityIssue.find_by_name(priority),
     employee: Employee.find_by_full_name(employee),
     tags: [Tag.find_by_name(tag)],
     type_issue: TypeIssue.find_by_name(type),

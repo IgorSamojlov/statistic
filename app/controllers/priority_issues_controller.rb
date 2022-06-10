@@ -1,25 +1,20 @@
 class PriorityIssuesController < ApplicationController
   before_action :set_priority_issue, only: %i[ show edit update destroy ]
 
-  # GET /priority_issues or /priority_issues.json
   def index
-    @priority_issues = PriorityIssue.all
+    @priority_issues = PriorityIssue.all.page(params[:page])
   end
 
-  # GET /priority_issues/1 or /priority_issues/1.json
   def show
   end
 
-  # GET /priority_issues/new
   def new
     @priority_issue = PriorityIssue.new
   end
 
-  # GET /priority_issues/1/edit
   def edit
   end
 
-  # POST /priority_issues or /priority_issues.json
   def create
     @priority_issue = PriorityIssue.new(priority_issue_params)
 
@@ -34,7 +29,6 @@ class PriorityIssuesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /priority_issues/1 or /priority_issues/1.json
   def update
     respond_to do |format|
       if @priority_issue.update(priority_issue_params)
@@ -47,7 +41,6 @@ class PriorityIssuesController < ApplicationController
     end
   end
 
-  # DELETE /priority_issues/1 or /priority_issues/1.json
   def destroy
     @priority_issue.destroy
 
@@ -58,13 +51,12 @@ class PriorityIssuesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_priority_issue
-      @priority_issue = PriorityIssue.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def priority_issue_params
-      params.fetch(:priority_issue, {})
-    end
+  def set_priority_issue
+    @priority_issue = PriorityIssue.find(params[:id])
+  end
+
+  def priority_issue_params
+    params.require(:priority_issue).permit(:name)
+  end
 end

@@ -1,0 +1,6 @@
+.container
+  h2
+    | Новый Приоритет
+
+  = render 'form', priority_issue: @priority_issue
+  = link_to 'Назад', priority_issues_path, class: "btn btn-outline-dark"

@@ -1,0 +1,27 @@
+.container
+  - if notice.present?
+    .alert.alert-success.alert-dismissible.fade.show role="alert"
+      strong
+        = notice
+      button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"
+
+  h2 Пользователи
+
+  table.table
+    thead
+      tr
+        th ID
+        th Почта
+        th Роль
+
+    tbody
+      - @users.each do |user|
+        tr
+          td = user.id
+          td = user.email
+          td = user.role
+
+  br
+    .row.justify-content-center
+      .col-md-6.offset-md-2
+        = paginate @users

@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   resources :priority_issues
   resources :type_issues
   resources :projects
+
   devise_for :users
 
   get 'metrics', to: 'statistic#metrics'

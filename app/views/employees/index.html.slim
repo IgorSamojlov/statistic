@@ -1,0 +1,33 @@
+.container
+  - if notice.present?
+    .alert.alert-success.alert-dismissible.fade.show role="alert"
+      strong
+        = notice
+      button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"
+
+  h2 Сотрудники
+
+  table.table
+    thead
+      tr
+        th ID
+        th ФИО
+        th Позиция
+
+    tbody
+      - @employees.each do |employee|
+        tr
+          td = employee.id
+          td = employee.full_name
+          td = employee.position
+          td = link_to 'Показать', employee
+          td = link_to 'Редактировать', edit_employee_path(employee)
+          td = link_to 'Удалить', employee, method: :delete, data: { confirm: 'Вы уверены?' }
+
+  = link_to 'Новый Сотрудник', new_employee_path, class: 'btn btn-outline-success btn-sm'
+
+  br
+    .row.justify-content-center
+      .col-md-6.offset-md-2
+        = paginate @employees
+

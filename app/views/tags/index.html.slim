@@ -1,0 +1,30 @@
+.container
+  - if notice.present?
+    .alert.alert-success.alert-dismissible.fade.show role="alert"
+      strong
+        = notice
+      button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"
+
+  h2 Теги
+
+  table.table
+    thead
+      tr
+        th ID
+        th Название
+
+    tbody
+      - @tags.each do |tag|
+        tr
+          td = tag.id
+          td = tag.name
+          td = link_to 'Показать', tag
+          td = link_to 'Редактировать', edit_tag_path(tag)
+          td = link_to 'Удалить', tag, method: :delete, data: { confirm: 'Вы уверены?' }
+
+  = link_to 'Новый Тег', new_tag_path, class: 'btn btn-outline-success btn-sm'
+
+  br
+    .row.justify-content-center
+      .col-md-6.offset-md-2
+        = paginate @tags

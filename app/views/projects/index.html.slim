@@ -1,0 +1,31 @@
+.container
+  - if notice.present?
+    .alert.alert-success.alert-dismissible.fade.show role="alert"
+      strong
+        = notice
+      button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"
+
+  h2 Проекты
+
+  table.table
+    thead
+      tr
+        th ID
+        th Название
+
+    tbody
+      - @projects.each do |project|
+        tr
+          td = project.id
+          td = project.name
+          td = link_to 'Показать', project
+          td = link_to 'Редактировать', edit_project_path(project)
+          td = link_to 'Удалить', project, method: :delete, data: { confirm: 'Вы уверены?' }
+
+  = link_to 'Новый проект', new_project_path, class: 'btn btn-outline-success btn-sm'
+
+  br
+    .row.justify-content-center
+      .col-md-6.offset-md-2
+        = paginate @projects
+

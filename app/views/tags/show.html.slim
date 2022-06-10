@@ -1,0 +1,19 @@
+.container
+  p id="notice"
+    = notice
+
+  h2
+    | Просмотр
+
+  table.table
+    tbody
+      tr
+        td = 'ID'
+        td = @tag.id
+      tr
+        td = 'Название'
+        td = @tag.name
+
+  .btn-group
+    = link_to 'Редактировать', edit_tag_path(@tag), class: "btn btn-outline-dark"
+    = link_to 'Назад', tags_path, class: "btn btn-outline-dark"

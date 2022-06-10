@@ -1,0 +1,19 @@
+.container
+  p id="notice"
+    = notice
+
+  h2
+    | Просмотр
+
+  table.table
+    tbody
+      tr
+        td = 'ID'
+        td = @state_issue.id
+      tr
+        td = 'Название'
+        td = @state_issue.name
+
+  .btn-group
+    = link_to 'Редактировать', edit_state_issue_path(@state_issue), class: "btn btn-outline-dark"
+    = link_to 'Назад', state_issues_path, class: "btn btn-outline-dark"

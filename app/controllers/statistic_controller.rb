@@ -1,9 +1,8 @@
 class StatisticController < ApplicationController
   def metrics
-    # Issue.
-      # joins(:type_issue, :employee).
-      # where(type_issues: {name: 'Bug'})
-
-    # @percent_metric =
+    @pie = PieService.call(params)
+    @by_project = ByProjectService.call(params)
+    @by_priority = ByPriorityService.call(params)
+    @by_priority_and_state_service = ByPriorityAndStateService.call(params)
   end
 end

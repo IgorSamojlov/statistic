@@ -1,25 +1,20 @@
 class StateIssuesController < ApplicationController
   before_action :set_state_issue, only: %i[ show edit update destroy ]
 
-  # GET /state_issues or /state_issues.json
   def index
-    @state_issues = StateIssue.all
+    @state_issues = StateIssue.all.page(params[:page])
   end
 
-  # GET /state_issues/1 or /state_issues/1.json
   def show
   end
 
-  # GET /state_issues/new
   def new
     @state_issue = StateIssue.new
   end
 
-  # GET /state_issues/1/edit
   def edit
   end
 
-  # POST /state_issues or /state_issues.json
   def create
     @state_issue = StateIssue.new(state_issue_params)
 
@@ -34,7 +29,6 @@ class StateIssuesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /state_issues/1 or /state_issues/1.json
   def update
     respond_to do |format|
       if @state_issue.update(state_issue_params)
@@ -47,7 +41,6 @@ class StateIssuesController < ApplicationController
     end
   end
 
-  # DELETE /state_issues/1 or /state_issues/1.json
   def destroy
     @state_issue.destroy
 
@@ -58,13 +51,11 @@ class StateIssuesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_state_issue
       @state_issue = StateIssue.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
     def state_issue_params
-      params.fetch(:state_issue, {})
+      params.require(:state_issue).permit(:name)
     end
 end

@@ -1,0 +1,31 @@
+.container
+  - if notice.present?
+    .alert.alert-success.alert-dismissible.fade.show role="alert"
+      strong
+        = notice
+      button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"
+
+  h2 Типы задачи
+
+  table.table
+    thead
+      tr
+        th ID
+        th Название
+
+    tbody
+      - @type_issues.each do |type_issue|
+        tr
+          td = type_issue.id
+          td = type_issue.name
+          td = link_to 'Показать', type_issue
+          td = link_to 'Редактировать', edit_type_issue_path(type_issue)
+          td = link_to 'Удалить', type_issue, method: :delete, data: { confirm: 'Вы уверены?' }
+
+  = link_to 'Новый Тип задачи', new_type_issue_path, class: 'btn btn-outline-success btn-sm'
+
+  br
+    .row.justify-content-center
+      .col-md-6.offset-md-2
+        = paginate @type_issues
+

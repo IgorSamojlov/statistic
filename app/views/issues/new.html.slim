@@ -1,0 +1,6 @@
+.container
+  h2
+    | Новая Задача
+
+  = render 'form', issue: @issue
+  = link_to 'Назад', type_issues_path, class: "btn btn-outline-dark"

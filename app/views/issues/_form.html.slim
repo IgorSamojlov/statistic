@@ -1,0 +1,68 @@
+.form
+  = form_with(model: issue, local: true) do |form|
+    - if issue.errors.any?
+      div id="error_explanation"
+        h2 = pluralize(issue.errors.count, "error")
+
+        ul
+          - issue.errors.full_messages.each do |message|
+            li
+              = message
+
+    .mb-3
+      = form.label :project_id, 'Проект', class: 'form-label'
+      = form.select :project_id, options_for_select(Project.pluck(:name, :id), issue.project&.id), {}, {class: 'form-select'}
+
+    .mb-3
+      = form.label :employee_id, 'Сотрудник', class: 'form-label'
+      = form.select :employee_id, options_for_select(Employee.pluck(:full_name, :id), issue.employee&.id), {}, {class: 'form-select'}
+
+    .mb-3
+      = form.label :priority_issue_id, 'Приоритет', class: 'form-label'
+      = form.select :priority_issue_id, options_for_select(PriorityIssue.pluck(:name, :id), issue.priority_issue&.id), {}, {class: 'form-select'}
+
+    .mb-3
+      = form.label :state_issue_id, 'Статус', class: 'form-label'
+      = form.select :state_issue_id, options_for_select(StateIssue.pluck(:name, :id), issue.state_issue&.id), {}, {class: 'form-select'}
+
+    .mb-3
+      = form.label :type_issue_id, 'Тип', class: 'form-label'
+      = form.select :type_issue_id, options_for_select(TypeIssue.pluck(:name, :id), issue.type_issue&.id), {}, {class: 'form-select'}
+
+    .mb-3
+      = form.label :tag_ids, 'Теги', class: 'form-label'
+      = form.select :tag_ids, options_for_select(Tag.pluck(:name, :id), issue.tags&.ids), {}, class: 'form-select', multiple: true
+    .row
+      .col-md-6
+        .mb-3
+          .col-auto
+            = form.label :date_start_dev, 'Дата начала разработки', class: 'form-label'
+          .col-auto
+            = form.date_select(:date_start_dev, {selected: issue.date_start_dev || Date.today, order: [:day, :month, :year]}, class: 'form-control')
+      .col-md-6
+        .mb-3
+          .col-auto
+            = form.label :date_end_dev, 'Дата завершения разработки', class: 'form-label'
+          .col-auto
+            = form.date_select(:date_end_dev, {selected: issue.date_end_dev || Date.today, order: [:day, :month, :year]}, class: 'form-control')
+    .row
+      .col-md-6
+        .mb-3
+          .col-auto
+            = form.label :date_start_test, 'Дата начала тестирования', class: 'form-label'
+          .col-auto
+            = form.date_select(:date_start_test, {selected: issue.date_start_test || Date.today, order: [:day, :month, :year]}, class: 'form-control')
+      .col-md-6
+        .mb-3
+          .col-auto
+            = form.label :date_end_test, 'Дата завершения тестирования', class: 'form-label'
+          .col-auto
+            = form.date_select(:date_end_test, {selected: issue.date_end_test || Date.today, order: [:day, :month, :year]}, class: 'form-control')
+    .mb-3
+      = form.label :summary, 'Описание', class: 'form-label'
+      = form.text_area :summary, class: 'form-control'
+
+    br
+
+    .actions
+      = form.submit 'Сохранить', class: 'btn btn-outline-success'

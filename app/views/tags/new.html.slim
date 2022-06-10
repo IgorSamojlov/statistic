@@ -1,0 +1,6 @@
+.container
+  h2
+    | Новый Тег
+
+  = render 'form', tag: @tag
+  = link_to 'Назад', tags_path, class: "btn btn-outline-dark"

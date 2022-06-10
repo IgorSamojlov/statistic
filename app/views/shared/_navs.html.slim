@@ -8,10 +8,21 @@
     li.nav-item
       = link_to 'Проекты', projects_path, class: link_class('projects')
     li.nav-item
-      = link_to 'Исполнители', employees_path, class: link_class('employees')
+      = link_to 'Сотрудники', employees_path, class: link_class('employees')
+    li.nav-item
+      = link_to 'Типы задачи', type_issues_path, class: link_class('type_issues')
+    li.nav-item
+      = link_to 'Статусы', state_issues_path, class: link_class('state_issues')
+    li.nav-item
+      = link_to 'Теги', tags_path, class: link_class('tags')
+    li.nav-item
+      = link_to 'Приоритеты', priority_issues_path, class: link_class('priority_issues')
     li.nav-item.dropdown
       a.nav-link.dropdown-toggle data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" Действия
       ul class="dropdown-menu"
+        li = link_to 'Пользователи', users_path, class: 'dropdown-item'
+        li
+          hr class="dropdown-divider"
         li = link_to 'Выйти', destroy_user_session_path, method: :delete, class: 'dropdown-item'
         li = link_to 'Вoйти', user_session_path, class: 'dropdown-item'
   hr

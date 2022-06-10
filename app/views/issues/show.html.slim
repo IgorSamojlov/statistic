@@ -1,0 +1,61 @@
+.container
+  p id="notice"
+    = notice
+
+  h2
+    | Просмотр
+
+  table.table
+    tbody
+      tr
+        th = 'ID'
+        td = @issue.id
+      tr
+        th = 'Проект'
+        td = @issue.project.name
+      tr
+        th = 'Сотрудники'
+        td = @issue.employee.full_name
+      tr
+        th = 'Приоритет'
+        td = @issue.priority_issue.name
+      tr
+        th = 'Статус'
+        td = @issue.state_issue.name
+      tr
+        th = 'Тип'
+        td = @issue.type_issue.name
+      tr
+        th = 'Теги'
+        td
+          ul
+            - @issue.tags.each do |tag|
+              li
+                = tag.name
+      tr
+        th = 'Дата создания'
+        td = l(@issue.created_at)
+      tr
+        th = 'Дата начала разработки'
+        td = l(@issue.date_start_dev)
+      tr
+        th = 'Дата завершения разработки'
+        td = l(@issue.date_end_dev)
+      tr
+        th = 'Дата начала тестирования'
+        td = l(@issue.date_start_test)
+      tr
+        th = 'Дата начала тестирования'
+        td = l(@issue.date_start_test)
+      tr
+        th = 'Дата завершения тестирования'
+        td = l(@issue.date_end_test)
+      tr
+        th = 'Описание'
+        td
+          pre style="white-space: pre-wrap;"
+            = @issue.summary
+
+  .btn-group
+    = link_to 'Редактировать', edit_issue_path(@issue), class: "btn btn-outline-dark"
+    = link_to 'Назад',issues_path, class: "btn btn-outline-dark"

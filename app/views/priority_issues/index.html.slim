@@ -1,0 +1,31 @@
+.container
+  - if notice.present?
+    .alert.alert-success.alert-dismissible.fade.show role="alert"
+      strong
+        = notice
+      button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"
+
+  h2 Приоритеты
+
+  table.table
+    thead
+      tr
+        th ID
+        th Название
+
+    tbody
+      - @priority_issues.each do |priority_issue|
+        tr
+          td = priority_issue.id
+          td = priority_issue.name
+          td = link_to 'Показать', priority_issue
+          td = link_to 'Редактировать', edit_priority_issue_path(priority_issue)
+          td = link_to 'Удалить', priority_issue, method: :delete, data: { confirm: 'Вы уверены?' }
+
+  = link_to 'Новый Приоритет', new_priority_issue_path, class: 'btn btn-outline-success btn-sm'
+
+  br
+    .row.justify-content-center
+      .col-md-6.offset-md-2
+        = paginate @priority_issues
+

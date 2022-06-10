@@ -1,0 +1,6 @@
+.container
+  h2
+    | Новый Статус
+
+  = render 'form', state_issue: @state_issue
+  = link_to 'Назад', state_issues_path, class: "btn btn-outline-dark"

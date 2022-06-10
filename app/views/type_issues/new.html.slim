@@ -1,0 +1,6 @@
+.container
+  h2
+    | Новый Тип
+
+  = render 'form', type_issue: @type_issue
+  = link_to 'Назад', type_issues_path, class: "btn btn-outline-dark"

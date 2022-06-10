@@ -1,0 +1,8 @@
+.container
+  h1 Редактировать Статус
+
+  = render 'form', state_issue: @state_issue
+
+  .btn-group
+    = link_to 'Просмотор', @state_issue, class: "btn btn-outline-dark"
+    = link_to 'Назад', state_issues_path, class: "btn btn-outline-dark"

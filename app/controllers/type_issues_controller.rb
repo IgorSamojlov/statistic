@@ -1,25 +1,20 @@
 class TypeIssuesController < ApplicationController
   before_action :set_type_issue, only: %i[ show edit update destroy ]
 
-  # GET /type_issues or /type_issues.json
   def index
-    @type_issues = TypeIssue.all
+    @type_issues = TypeIssue.all.page(params[:page])
   end
 
-  # GET /type_issues/1 or /type_issues/1.json
   def show
   end
 
-  # GET /type_issues/new
   def new
     @type_issue = TypeIssue.new
   end
 
-  # GET /type_issues/1/edit
   def edit
   end
 
-  # POST /type_issues or /type_issues.json
   def create
     @type_issue = TypeIssue.new(type_issue_params)
 
@@ -34,7 +29,6 @@ class TypeIssuesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /type_issues/1 or /type_issues/1.json
   def update
     respond_to do |format|
       if @type_issue.update(type_issue_params)
@@ -47,7 +41,6 @@ class TypeIssuesController < ApplicationController
     end
   end
 
-  # DELETE /type_issues/1 or /type_issues/1.json
   def destroy
     @type_issue.destroy
 
@@ -58,13 +51,11 @@ class TypeIssuesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_type_issue
       @type_issue = TypeIssue.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
     def type_issue_params
-      params.fetch(:type_issue, {})
+      params.require(:type_issue).permit(:name)
     end
 end
